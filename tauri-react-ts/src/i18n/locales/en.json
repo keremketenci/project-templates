@@ -1,6 +1,7 @@
 {
   "settings": {
     "title": "Settings",
+    "description": "Customize the app.",
     "language": "Language",
     "theme": "Theme"
   },
