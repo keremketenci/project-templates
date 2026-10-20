@@ -120,11 +120,19 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
+  }
+
   html {
     @apply font-sans;
-    }
+    /* Removes the double-tap zoom delay on touch devices */
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Stops the rubber-band bounce when scrolling past the edges */
+    overscroll-behavior: none;
+    /* Removes the gray flash when tapping elements on mobile */
+    -webkit-tap-highlight-color: transparent;
+  }
 }

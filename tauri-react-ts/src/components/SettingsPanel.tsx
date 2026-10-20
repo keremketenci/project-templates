@@ -31,7 +31,10 @@ export function SettingsPanel() {
       </Button>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right">
+        <SheetContent
+          side="right"
+          className="pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)]"
+        >
           <SheetHeader>
             <SheetTitle>{t("settings.title")}</SheetTitle>
             <SheetDescription>{t("settings.description")}</SheetDescription>
@@ -40,7 +43,7 @@ export function SettingsPanel() {
           <div className="space-y-6 p-4">
             <section className="space-y-2">
               <h3 className="text-sm font-medium">{t("settings.language")}</h3>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(6.5rem,1fr))] gap-2">
                 {LANGUAGES.map((language) => (
                   <Button
                     key={language}
@@ -56,7 +59,7 @@ export function SettingsPanel() {
 
             <section className="space-y-2">
               <h3 className="text-sm font-medium">{t("settings.theme")}</h3>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(6.5rem,1fr))] gap-2">
                 {THEMES.map((theme) => (
                   <Button
                     key={theme}
