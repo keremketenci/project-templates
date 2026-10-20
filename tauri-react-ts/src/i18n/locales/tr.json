@@ -1,0 +1,12 @@
+{
+  "settings": {
+    "title": "Ayarlar",
+    "language": "Dil",
+    "theme": "Tema"
+  },
+  "theme": {
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Sistem"
+  }
+}

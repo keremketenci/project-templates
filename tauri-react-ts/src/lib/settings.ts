@@ -1,28 +1,48 @@
 export type Theme = "light" | "dark" | "system";
+export type Language = "en" | "tr";
 
 export interface Settings {
   theme: Theme;
+  language: Language;
 }
 
-const STORAGE_KEY = "app-settings";
 export const THEMES: Theme[] = ["light", "dark", "system"];
-const DEFAULT_SETTINGS: Settings = { theme: "system" };
+export const LANGUAGES: Language[] = ["en", "tr"];
+
+// Each language is displayed in its own language
+export const LANGUAGE_NAMES: Record<Language, string> = {
+  en: "English",
+  tr: "Türkçe",
+};
+
+const STORAGE_KEY = "app-settings";
+
+function detectLanguage(): Language {
+  const deviceLanguage = navigator.language.toLowerCase();
+  return deviceLanguage.startsWith("tr") ? "tr" : "en";
+}
+
+function getDefaultSettings(): Settings {
+  return { theme: "system", language: detectLanguage() };
+}
 
 export function loadSettings(): Settings {
+  const defaults = getDefaultSettings();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_SETTINGS;
+    if (!raw) return defaults;
     const parsed = JSON.parse(raw) as Partial<Settings>;
+    // Ignore invalid stored values and fall back to defaults
     return {
-      ...DEFAULT_SETTINGS,
-      ...parsed,
-      // Ignore invalid stored values
       theme: THEMES.includes(parsed.theme as Theme)
         ? (parsed.theme as Theme)
-        : DEFAULT_SETTINGS.theme,
+        : defaults.theme,
+      language: LANGUAGES.includes(parsed.language as Language)
+        ? (parsed.language as Language)
+        : defaults.language,
     };
   } catch {
-    return DEFAULT_SETTINGS;
+    return defaults;
   }
 }
 

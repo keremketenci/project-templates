@@ -5,6 +5,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import i18n from "@/i18n";
 import {
   applyTheme,
   loadSettings,
@@ -22,9 +23,11 @@ const SettingsContext = createContext<SettingsContextValue | null>(null);
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<Settings>(loadSettings);
 
-  // Persist settings and apply the theme whenever they change
+  // Persist settings and apply theme and language whenever they change
   useEffect(() => {
     applyTheme(settings.theme);
+    i18n.changeLanguage(settings.language);
+    document.documentElement.lang = settings.language;
     saveSettings(settings);
   }, [settings]);
 

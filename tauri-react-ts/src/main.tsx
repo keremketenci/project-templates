@@ -4,6 +4,7 @@ import App from "./App";
 import { SettingsProvider } from "./settings/SettingsContext";
 import { applyTheme, loadSettings } from "./lib/settings";
 import "./index.css";
+import "./i18n";
 
 // Apply the saved theme before the first render to avoid a flash
 applyTheme(loadSettings().theme);
