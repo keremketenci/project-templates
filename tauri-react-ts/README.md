@@ -98,3 +98,6 @@ If the phone shows a connection error, open `http://<pc-ip>:1420` in the phone b
   They affect development tooling only and are not bundled into the app.
 - shadcn/ui is based on Base UI here, so component APIs differ from the Radix versions.
   Check the generated files in `src/shadcn/ui/` before using a new component.
+- `src/shadcn/ui/sheet.tsx` is edited by hand: the close button position includes
+  `env(safe-area-inset-*)` so it stays below the status bar on phones.
+  Re-adding the component with `--overwrite` removes this change.
